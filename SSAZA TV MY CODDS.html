@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSAZA TV - Y'OMUNTU WABULIJJO | Uganda's Premier Broadcast</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            color: #1e1e1e;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #ffd700;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #c41e3a;
+            border: 3px solid #ffd700;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .site-title h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .site-title p {
+            font-size: 1rem;
+            font-style: italic;
+            color: #ffd700;
+        }
+
+        .motto {
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            border-left: 4px solid #ffd700;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background: #2c3e50;
+            padding: 0.8rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-menu a:hover {
+            background: #c41e3a;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a i {
+            margin-right: 5px;
+        }
+
+        /* Breaking News Ticker — redesigned with spin control */
+        .breaking-ticker {
+            background: #1a1a1a;
+            color: white;
+            padding: 0.5rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 2px solid #c41e3a;
+            flex-wrap: wrap;
+        }
+
+        .ticker-label {
+            background: #c41e3a;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .ticker-wrapper {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            background: #111;
+            border-radius: 30px;
+            padding: 0.3rem 0;
+            min-width: 250px;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            white-space: nowrap;
+            /* animation duration will be set by JS */
+            animation-name: tickerSpin;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            padding-left: 100%;  /* push off screen right */
+        }
+
+        @keyframes tickerSpin {
+            0% { transform: translateX(0); }        /* start at right edge */
+            100% { transform: translateX(-100%); }   /* scroll to left */
+        }
+
+        /* speed control slider */
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #2a2a2a;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            border: 1px solid #ffd700;
+            color: #ffd700;
+        }
+
+        .speed-control i {
+            font-size: 0.8rem;
+        }
+
+        .speed-control input {
+            width: 90px;
+            cursor: pointer;
+            accent-color: #c41e3a;
+        }
+
+        .speed-value {
+            min-width: 45px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* Live Player Section */
+        .live-player {
+            padding: 2rem;
+            background: linear-gradient(to right, #000428, #004e92);
+        }
+
+        .player-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+            background: rgba(0,0,0,0.5);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid #ffd700;
+        }
+
+        .video-main {
+            position: relative;
+        }
+
+        .video-main iframe {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            border: 3px solid #ffd700;
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #c41e3a;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .live-chat {
+            background: #1a1a2e;
+            border-radius: 10px;
+            padding: 1rem;
+            color: white;
+            border: 1px solid #ffd700;
+        }
+
+        .chat-header {
+            border-bottom: 1px solid #ffd700;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 0.5rem;
+            background: #16213e;
+            border-radius: 5px;
+        }
+
+        /* Main Content Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Tournament Section */
+        .tournament-section {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border-top: 4px solid #c41e3a;
+        }
+
+        .section-title {
+            color: #c41e3a;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 0.5rem;
+        }
+
+        .groups-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .group-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+        }
+
+        .group-title {
+            background: #c41e3a;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .group-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .group-table th {
+            background: #2c3e50;
+            color: white;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .group-table td {
+            padding: 0.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .group-table tr:hover {
+            background: #f0f0f0;
+        }
+
+        .standings-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .standings-table th {
+            background: #2c3e50;
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        .standings-table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .standings-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .position-1 { background: #ffd700; font-weight: bold; }
+        .position-2 { background: #c0c0c0; }
+        .position-3 { background: #cd7f32; }
+
+        /* News Cards */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .news-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .news-category {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #c41e3a;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .news-content {
+            padding: 1.2rem;
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #1e1e1e;
+        }
+
+        .news-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-excerpt {
+            color: #444;
+            line-height: 1.5;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-widget {
+            margin-bottom: 2rem;
+        }
+
+        .widget-title {
+            color: #c41e3a;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #ffd700;
+            padding-left: 0.8rem;
+        }
+
+        .trending-list {
+            list-style: none;
+        }
+
+        .trending-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .trending-number {
+            background: #c41e3a;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-col h3 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #ffd700;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            background: #c41e3a;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #ffd700;
+            color: #c41e3a;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #333;
+            color: #ccc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .player-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .groups-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .nav-menu {
+                justify-content: center;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: #c41e3a;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #8b0000;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #c41e3a;
+            color: #c41e3a;
+        }
+
+        .btn-outline:hover {
+            background: #c41e3a;
+            color: white;
+        }
+
+        .badge {
+            background: #ffd700;
+            color: #1a1a1a;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="https://drive.google.com/uc?export=view&id=1xVeh5lL-YHgcgST5QDO8Rlz28qAZGvNs" alt="SSAZA TV Logo">
+            </div>
+            <div class="site-title">
+                <h1>SSAZA TV</h1>
+                <p>#Agaliwo</p>
+            </div>
+        </div>
+        <div class="motto">
+            <i class="fas fa-quote-left"></i> Y'OMUNTU WABULIJJO <i class="fas fa-quote-right"></i>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <ul class="nav-menu">
+            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-newspaper"></i> News</a></li>
+            <li><a href="#"><i class="fas fa-landmark"></i> Politics</a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Business</a></li>
+            <li><a href="#"><i class="fas fa-futbol"></i> Sports</a></li>
+            <li><a href="#"><i class="fas fa-film"></i> Entertainment</a></li>
+            <li><a href="#"><i class="fas fa-leaf"></i> Lifestyle</a></li>
+            <li><a href="#"><i class="fas fa-trophy"></i> Tournament</a></li>
+            <li><a href="#"><i class="fas fa-hand-holding-heart"></i> Support Us</a></li>
+            <li><a href="#"><i class="fas fa-bell"></i> News Alerts</a></li>
+            <li><a href="#"><i class="fas fa-puzzle-piece"></i> Puzzles</a></li>
+            <li><a href="#"><i class="fas fa-globe"></i> World News</a></li>
+        </ul>
+    </nav>
+
+    <!-- Breaking News Ticker with Spin Speed Control -->
+    <div class="breaking-ticker">
+        <span class="ticker-label"><i class="fas fa-exclamation-triangle"></i> BREAKING</span>
+        <div class="ticker-wrapper">
+            <div class="ticker-content" id="spinTicker">
+                <strong>LIVE:</strong> Masaza Cup 2026 officially launched at Bulange • Bobi Wine addresses nation from hiding • Chagos Islands dispute escalates • Airtel launches special Masaza Cup bundles • Uganda Cranes ready for AFCON qualifiers • Katikkiro meets with Masaza teams • 
+            </div>
+        </div>
+        <div class="speed-control">
+            <i class="fas fa-tachometer-alt"></i>
+            <input type="range" id="tickerSpeed" min="5" max="60" value="30" step="1">
+            <span id="speedDisplay" class="speed-value">30s</span>
+        </div>
+    </div>
+
+    <!-- Live Player Section -->
+    <section class="live-player">
+        <div class="player-container">
+            <div class="video-main">
+                <div class="live-badge">
+                    <i class="fas fa-circle"></i> LIVE NOW
+                </div>
+                <iframe src="https://player.live.com/embed" frameborder="0" allowfullscreen></iframe>
+                <div style="margin-top: 1rem; color: white;">
+                    <h3><i class="fas fa-video"></i> SSAZA TV Live Broadcast</h3>
+                    <p>Watch our 24/7 news coverage and updates from across Uganda</p>
+                </div>
+            </div>
+            <div class="live-chat">
+                <div class="chat-header">
+                    <span><i class="fas fa-comments"></i> Live Chat</span>
+                    <span class="badge">2,847 watching</span>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <p><strong>John:</strong> Great coverage of Masaza Cup!</p>
+                    <p><strong>Sarah:</strong> Buddu looking strong this year</p>
+                    <p><strong>Mike:</strong> Live from Masaka!</p>
+                    <p><strong>Jane:</strong> Go Ssingo!</p>
+                </div>
+                <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                    <input type="text" placeholder="Join the conversation..." style="flex: 1; padding: 0.5rem; border-radius: 5px; border: none;">
+                    <button class="btn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <div class="main-grid">
+        <div class="main-content">
+            <!-- Tournament Section -->
+            <section class="tournament-section">
+                <h2 class="section-title">
+                    <i class="fas fa-trophy"></i> Buganda Kingdom Masaza Cup 2026
+                </h2>
+                
+                <!-- Groups -->
+                <div class="groups-container">
+                    <!-- Group A -->
+                    <div class="group-card">
+                        <div class="group-title">GROUP A - BULANGE</div>
+                        <table class="group-table">
+                            <tr><th colspan="2">District</th></tr>
+                            <tr><td>1. Buddu</td><td>Masaka</td></tr>
+                            <tr><td>2. Buluuli</td><td>Nakasongola</td></tr>
+                            <tr><td>3. Busiro</td><td>Wakiso</td></tr>
+                            <tr><td>4. Busujju</td><td>Mityana</td></tr>
+                            <tr><td>5. Gomba</td><td>Gomba</td></tr>
+                            <tr><td>6. Ssese</td><td>Kalangala</td></tr>
+                        </table>
+                    </div>
+                    
+                    <!-- Group B -->
+                    <div class="group-card">
+                        <div class="group-title">GROUP B - MASENGERE</div>
+                        <table class="group-table">
+                            <tr><th colspan="2">District</th></tr>
+                            <tr><td>1. Bugerere</td><td>Kayunga</td></tr>
+                            <tr><td>2. Bulemeezi</td><td>Luweero</td></tr>
+                            <tr><td>3. Buvuma</td><td>Buvuma</td></tr>
+                            <tr><td>4. Buweekula</td><td>Mubende</td></tr>
+                            <tr><td>5. Kyaddondo</td><td>Wakiso</td></tr>
+                            <tr><td>6. Mawokota</td><td>Mpigi</td></tr>
+                        </table>
+                    </div>
+                    
+                    <!-- Group C -->
+                    <div class="group-card">
+                        <div class="group-title">GROUP C - MUGANZIRWAZZA</div>
+                        <table class="group-table">
+                            <tr><th colspan="2">District</th></tr>
+                            <tr><td>1. Butambala</td><td>Butambala</td></tr>
+                            <tr><td>2. Kabula</td><td>Rakai</td></tr>
+                            <tr><td>3. Kkooki</td><td>Rakai</td></tr>
+                            <tr><td>4. Kyaggwe</td><td>Mukono</td></tr>
+                            <tr><td>5. Mawogola</td><td>Sembabule</td></tr>
+                            <tr><td>6. Ssingo</td><td>Mityana</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Standings Tabs -->
+                <div style="margin: 1rem 0; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <button class="btn">Teams</button>
+                    <button class="btn">Groups</button>
+                    <button class="btn">Fixtures</button>
+                    <button class="btn">Results</button>
+                    <button class="btn">Players</button>
+                    <button class="btn">Top Scorers</button>
+                    <button class="btn">Statistics</button>
+                </div>
+
+                <!-- Standings Tables -->
+                <div style="overflow-x: auto;">
+                    <h3>Standings 2026</h3>
+                    
+                    <!-- Group A Standings -->
+                    <h4>Group A - Bulange</h4>
+                    <table class="standings-table">
+                        <tr>
+                            <th>Team</th><th>GP</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>P</th>
+                        </tr>
+                        <tr class="position-1">
+                            <td>Buluuli</td><td>10</td><td>5</td><td>4</td><td>1</td><td>10</td><td>3</td><td>+7</td><td>19</td>
+                        </tr>
+                        <tr class="position-2">
+                            <td>Busujju</td><td>10</td><td>5</td><td>3</td><td>2</td><td>11</td><td>8</td><td>+3</td><td>18</td>
+                        </tr>
+                        <tr class="position-3">
+                            <td>Ssese</td><td>10</td><td>6</td><td>0</td><td>4</td><td>10</td><td>8</td><td>+2</td><td>18</td>
+                        </tr>
+                        <tr><td>Gomba</td><td>10</td><td>2</td><td>3</td><td>5</td><td>7</td><td>9</td><td>-2</td><td>9</td></tr>
+                        <tr><td>Buddu</td><td>10</td><td>2</td><td>3</td><td>5</td><td>6</td><td>11</td><td>-5</td><td>9</td></tr>
+                        <tr><td>Busiro</td><td>10</td><td>2</td><td>3</td><td>5</td><td>5</td><td>10</td><td>-5</td><td>9</td></tr>
+                    </table>
+
+                    <!-- Group B Standings -->
+                    <h4 style="margin-top: 2rem;">Group B - Masengere</h4>
+                    <table class="standings-table">
+                        <tr>
+                            <th>Team</th><th>GP</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>P</th>
+                        </tr>
+                        <tr class="position-1">
+                            <td>Buweekula</td><td>10</td><td>7</td><td>1</td><td>2</td><td>16</td><td>6</td><td>+10</td><td>22</td>
+                        </tr>
+                        <tr class="position-2">
+                            <td>Mawokota</td><td>10</td><td>5</td><td>3</td><td>2</td><td>11</td><td>4</td><td>+7</td><td>18</td>
+                        </tr>
+                        <tr class="position-3">
+                            <td>Bugerere</td><td>10</td><td>4</td><td>5</td><td>1</td><td>10</td><td>9</td><td>+1</td><td>17</td>
+                        </tr>
+                        <tr><td>Kyaddondo</td><td>10</td><td>3</td><td>3</td><td>4</td><td>12</td><td>10</td><td>+2</td><td>12</td></tr>
+                        <tr><td>Bulemeezi</td><td>10</td><td>2</td><td>2</td><td>6</td><td>3</td><td>9</td><td>-6</td><td>8</td></tr>
+                        <tr><td>Buvuma</td><td>10</td><td>1</td><td>2</td><td>7</td><td>5</td><td>19</td><td>-14</td><td>5</td></tr>
+                    </table>
+
+                    <!-- Group C Standings -->
+                    <h4 style="margin-top: 2rem;">Group C - Muganzirwazza</h4>
+                    <table class="standings-table">
+                        <tr>
+                            <th>Team</th><th>GP</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>P</th>
+                        </tr>
+                        <tr class="position-1">
+                            <td>Ssingo</td><td>10</td><td>5</td><td>4</td><td>1</td><td>11</td><td>2</td><td>+9</td><td>19</td>
+                        </tr>
+                        <tr class="position-2">
+                            <td>Kyaggwe</td><td>10</td><td>5</td><td>4</td><td>1</td><td>9</td><td>4</td><td>+5</td><td>19</td>
+                        </tr>
+                        <tr class="position-3">
+                            <td>Kkooki</td><td>10</td><td>3</td><td>4</td><td>3</td><td>9</td><td>12</td><td>-3</td><td>13</td>
+                        </tr>
+                        <tr><td>Kabula</td><td>10</td><td>2</td><td>5</td><td>3</td><td>6</td><td>7</td><td>-1</td><td>11</td></tr>
+                        <tr><td>Butambala</td><td>10</td><td>1</td><td>5</td><td>4</td><td>8</td><td>12</td><td>-4</td><td>8</td></tr>
+                        <tr><td>Mawogola</td><td>10</td><td>2</td><td>2</td><td>6</td><td>7</td><td>13</td><td>-6</td><td>8</td></tr>
+                    </table>
+                </div>
+
+                <!-- Teams List -->
+                <div style="margin-top: 2rem;">
+                    <h3>All Teams & Districts</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem;">
+                        <div><strong>Buddu</strong> - Masaka</div>
+                        <div><strong>Bugerere</strong> - Kayunga</div>
+                        <div><strong>Bulemeezi</strong> - Luweero</div>
+                        <div><strong>Buluuli</strong> - Nakasongola</div>
+                        <div><strong>Busiro</strong> - Wakiso</div>
+                        <div><strong>Busujju</strong> - Mityana</div>
+                        <div><strong>Butambala</strong> - Butambala</div>
+                        <div><strong>Buvuma</strong> - Buvuma</div>
+                        <div><strong>Buweekula</strong> - Mubende</div>
+                        <div><strong>Gomba</strong> - Gomba</div>
+                        <div><strong>Kabula</strong> - Rakai</div>
+                        <div><strong>Kkooki</strong> - Rakai</div>
+                        <div><strong>Kyaddondo</strong> - Wakiso</div>
+                        <div><strong>Kyaggwe</strong> - Mukono</div>
+                        <div><strong>Mawogola</strong> - Sembabule</div>
+                        <div><strong>Mawokota</strong> - Mpigi</div>
+                        <div><strong>Ssese</strong> - Kalangala</div>
+                        <div><strong>Ssingo</strong> - Mityana</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- News Section -->
+            <section class="tournament-section">
+                <h2 class="section-title">
+                    <i class="fas fa-newspaper"></i> Catch Up With The News
+                </h2>
+                
+                <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                    <button class="btn btn-outline">Live Updates & Sports Highlights</button>
+                    <button class="btn btn-outline">Current Affairs & Shows</button>
+                    <button class="btn btn-outline">Business & Finance</button>
+                    <button class="btn btn-outline">Market Updates</button>
+                    <button class="btn btn-outline">Lifestyle & Entertainment</button>
+                    <button class="btn btn-outline">ALL NEWS</button>
+                </div>
+
+                <div class="news-grid">
+                    <!-- News Card 1 -->
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('https://i0.wp.com/kawowo.com/wp-content/uploads/2025/06/Buddu-players-applaud-the-fans.jpeg?resize=780%2C520&ssl=1')">
+                            <span class="news-category">Sports</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Buddu Edge Gomba 1-0 in Masaza Cup Opener</h3>
+                            <div class="news-meta"><i class="far fa-clock"></i> 2 hours ago • Masaka</div>
+                            <p class="news-excerpt">Defending champions Buddu secured a hard-fought victory against record-holders Gomba in a thrilling encounter at Kitovu Arena...</p>
+                        </div>
+                    </div>
+
+                    <!-- News Card 2 -->
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('https://i0.wp.com/kawowo.com/wp-content/uploads/2025/06/Buddu-players-celebrate-their-goal.jpeg?resize=780%2C520&ssl=1')">
+                            <span class="news-category">Tournament</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Katikkiro Mayiga Launches Masaza Cup 2026</h3>
+                            <div class="news-meta"><i class="far fa-clock"></i> 5 hours ago • Bulange</div>
+                            <p class="news-excerpt">"This tournament is about uniting communities and protecting the girl child," says Katikkiro at colorful launch ceremony...</p>
+                        </div>
+                    </div>
+
+                    <!-- News Card 3 -->
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('https://media.cnn.com/api/v1/images/stellar/prod/gettyimages-2263417189.jpg')">
+                            <span class="news-category">World News</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Jerusalem Holy Sites Closed for First Time in Ramadan</h3>
+                            <div class="news-meta"><i class="far fa-clock"></i> 12 hours ago • Jerusalem</div>
+                            <p class="news-excerpt">Israel closes Al-Aqsa Mosque citing Iranian missile attacks, putting regional tensions at critical point...</p>
+                        </div>
+                    </div>
+
+                    <!-- News Card 4 -->
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('https://ichef.bbci.co.uk/news/800/cpsprodpb/c8bd/live/324e77f0-f5e3-11f0-ba9d-e74ae9ca738f.jpg.webp')">
+                            <span class="news-category">Politics</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Bobi Wine: "I Won't Contest Results in Court"</h3>
+                            <div class="news-meta"><i class="far fa-clock"></i> 3 hours ago • Kampala</div>
+                            <p class="news-excerpt">Opposition leader calls for peaceful protests, cites lack of confidence in judiciary...</p>
+                        </div>
+                    </div>
+
+                    <!-- News Card 5 -->
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('https://i0.wp.com/kawowo.com/wp-content/uploads/2025/06/Buddu-in-action-against-Gomba.jpg?ssl=1')">
+                            <span class="news-category">Tournament</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Airtel Launches Special Masaza Cup Bundles</h3>
+                            <div class="news-meta"><i class="far fa-clock"></i> 1 day ago • Kampala</div>
+                            <p class="news-excerpt">New bundles offer comprehensive connectivity for fans following the tournament action...</p>
+                        </div>
+                    </div>
+
+                    <!-- News Card 6 -->
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('https://media.cnn.com/api/v1/images/stellar/prod/20260202-russia-africa-recruits-split.jpg')">
+                            <span class="news-category">Africa</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Kenyan Mother Searches for Son Lost in Russia</h3>
+                            <div class="news-meta"><i class="far fa-clock"></i> 2 days ago • Nairobi</div>
+                            <p class="news-excerpt">Anne Ndarua hasn't heard from her son since October after he went to Russia for engineering job...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- More News Section -->
+            <section class="tournament-section">
+                <h2 class="section-title">
+                    <i class="fas fa-fire"></i> TRENDING NOW
+                </h2>
+                
+                <div class="news-grid">
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('https://e0.365dm.com/25/09/768x432/skysports-humphries-van-gerwen_7018109.png')">
+                            <span class="news-category">Darts</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Luke Littler Makes History in Premier League</h3>
+                            <p>Teenage sensation becomes youngest player to reach final...</p>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('https://liveblog.digitalimages.sky/lc-images-sky/lcimg-e70f852d-e008-456d-9318-bbdb91f8de67.jpeg')">
+                            <span class="news-category">Football</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Man Utd Duo Travel to Newcastle Despite Illness</h3>
+                            <p>Maguire and Shaw pictured on Tyneside ahead of crucial match...</p>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('https://plusnews.ug/wp-content/uploads/2026/03/20260304_192440-1200x1494.jpg')">
+                            <span class="news-category">Politics</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">NRM Speakership Endorsement in Question</h3>
+                            <p>MPs demand signed CEC resolution as factions emerge...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Sidebar (unchanged) -->
+        <aside class="sidebar">
+            <!-- ... sidebar content ... (kept exactly as original, just condensed for space) -->
+            <div class="sidebar-widget"><h3 class="widget-title"><i class="fas fa-chart-line"></i> TRENDING STORIES</h3><ul class="trending-list"><li class="trending-item"><span class="trending-number">1</span><div><strong>Luke Littler makes history</strong><small style="color: #666;">12K shares</small></div></li><li class="trending-item"><span class="trending-number">2</span><div><strong>Keir Starmer on Gibraltar</strong><small style="color: #666;">8.5K shares</small></div></li><li class="trending-item"><span class="trending-number">3</span><div><strong>Iran: UK joins US bombing blitz</strong><small style="color: #666;">7.2K shares</small></div></li><li class="trending-item"><span class="trending-number">4</span><div><strong>Chagos Islands legal action</strong><small style="color: #666;">5.8K shares</small></div></li><li class="trending-item"><span class="trending-number">5</span><div><strong>Bobi Wine's message</strong><small style="color: #666;">4.9K shares</small></div></li></ul></div>
+            <div class="sidebar-widget"><h3 class="widget-title"><i class="fas fa-video"></i> VIDEOS</h3><div style="background: #f5f5f5; padding: 1rem; border-radius: 8px;"><div style="position: relative; margin-bottom: 1rem;"><img src="https://i0.wp.com/kawowo.com/wp-content/uploads/2025/06/Buddu-against-Gomba-in-2025-Masaza-Cup-opener.jpg?fit=780%2C603&ssl=1" style="width: 100%; border-radius: 8px;" alt="Video thumbnail"><i class="fas fa-play-circle" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3rem; color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.5);"></i></div><p><strong>Masaza Cup 2026 Opening Ceremony Highlights</strong></p></div><div style="margin-top: 1rem;"><div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;"><i class="fas fa-play" style="color: #c41e3a;"></i><span>Bobi Wine's Full Interview with BBC</span></div><div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;"><i class="fas fa-play" style="color: #c41e3a;"></i><span>Katikkiro Mayiga on Masaza Cup 2026</span></div></div></div>
+            <div class="sidebar-widget"><h3 class="widget-title"><i class="fas fa-users"></i> YOUR SAY</h3><div style="background: #f0f0f0; padding: 1rem; border-radius: 8px;"><p><i class="fas fa-quote-left" style="color: #c41e3a;"></i> Buddu will defend the title! They have the strongest squad this year. <i class="fas fa-quote-right" style="color: #c41e3a;"></i></p><p style="text-align: right; font-weight: bold;">- Masaka Fan</p></div><div style="background: #f0f0f0; padding: 1rem; border-radius: 8px; margin-top: 1rem;"><p><i class="fas fa-quote-left" style="color: #c41e3a;"></i> The new Airtel bundles are perfect for following the tournament. <i class="fas fa-quote-right" style="color: #c41e3a;"></i></p><p style="text-align: right; font-weight: bold;">- Wakiso Resident</p></div></div>
+            <div class="sidebar-widget"><h3 class="widget-title"><i class="fas fa-newspaper"></i> NEWS ALERTS</h3><div style="background: linear-gradient(135deg, #c41e3a, #8b0000); color: white; padding: 1.5rem; border-radius: 8px; text-align: center;"><i class="fas fa-bell" style="font-size: 2rem; margin-bottom: 0.5rem;"></i><h4>Get Breaking News</h4><p>Subscribe for instant alerts</p><input type="email" placeholder="Your email" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: none; border-radius: 4px;"><button class="btn" style="background: #ffd700; color: #1a1a1a; width: 100%;">Subscribe</button></div></div>
+            <div class="sidebar-widget"><h3 class="widget-title"><i class="fas fa-calendar-alt"></i> FIXTURES</h3><div style="background: #f9f9f9; padding: 1rem;"><div style="display: flex; justify-content: space-between; padding: 0.5rem; border-bottom: 1px solid #ddd;"><span>Buddu vs Ssingo</span><span class="badge">Today 4pm</span></div><div style="display: flex; justify-content: space-between; padding: 0.5rem; border-bottom: 1px solid #ddd;"><span>Gomba vs Kyaggwe</span><span class="badge">Tomorrow 2pm</span></div><div style="display: flex; justify-content: space-between; padding: 0.5rem;"><span>Buweekula vs Mawokota</span><span class="badge">Wed 3pm</span></div></div></div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- ... footer content ... (kept exactly as original) -->
+        <div class="footer-grid"><div class="footer-col"><h3><i class="fas fa-tv"></i> SSAZA TV</h3><p>Y'OMUNTU WABULIJJO<br>Uganda's Premier Broadcast Network</p><p>#Agaliwo</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-tiktok"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div><div class="footer-col"><h3>Quick Links</h3><ul class="footer-links"><li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> About SSAZA TV</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> News</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> Politics</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> Business</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> Sports</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> Contact Us</a></li></ul></div><div class="footer-col"><h3>News Categories</h3><ul class="footer-links"><li><a href="#">Breaking News</a></li><li><a href="#">Politics & Governance</a></li><li><a href="#">Business & Finance</a></li><li><a href="#">Sports</a></li><li><a href="#">Entertainment</a></li><li><a href="#">Lifestyle</a></li><li><a href="#">Weather</a></li></ul></div><div class="footer-col"><h3>Contact Information</h3><ul class="footer-links"><li><i class="fas fa-map-marker-alt"></i> Plot 24, Lumumba Avenue, Kampala, Uganda</li><li><i class="fas fa-phone"></i> +256 200 999 594</li><li><i class="fas fa-envelope"></i> info@ssazatv.ug</li><li><i class="fas fa-globe"></i> www.ssazatv.ug</li></ul></div></div><div class="copyright"><p>&copy; 2026 SSAZA TV. All rights reserved. | Y'OMUNTU WABULIJJO - Serving Uganda with Truth & Integrity</p></div>
+    </footer>
+
+    <!-- Live Chat Script (unchanged) and Speed Control Script -->
+    <script>
+        // Simulated chat messages
+        const chatMessages = document.getElementById('chatMessages');
+        const messages = [
+            'Great match today!',
+            'Buddu is unstoppable!',
+            'Love the coverage SSAZA TV',
+            'What time is the next game?',
+            'Go Ssingo! 💪',
+            'Live from Masaka 🔥',
+            'Best tournament ever!',
+            'Airtel bundles are working great'
+        ];
+
+        setInterval(() => {
+            const newMsg = document.createElement('p');
+            newMsg.innerHTML = `<strong>Fan${Math.floor(Math.random()*100)}:</strong> ${messages[Math.floor(Math.random()*messages.length)]}`;
+            chatMessages.appendChild(newMsg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Keep only last 20 messages
+            if (chatMessages.children.length > 20) {
+                chatMessages.removeChild(chatMessages.children[0]);
+            }
+        }, 5000);
+
+        // Ticker speed control
+        const ticker = document.getElementById('spinTicker');
+        const speedSlider = document.getElementById('tickerSpeed');
+        const speedDisplay = document.getElementById('speedDisplay');
+
+        function setTickerSpeed(seconds) {
+            ticker.style.animationDuration = seconds + 's';
+            speedDisplay.textContent = seconds + 's';
+        }
+
+        speedSlider.addEventListener('input', function(e) {
+            setTickerSpeed(e.target.value);
+        });
+
+        // initial set from default value (30)
+        setTickerSpeed(speedSlider.value);
+    </script>
+</body>
+</html>
